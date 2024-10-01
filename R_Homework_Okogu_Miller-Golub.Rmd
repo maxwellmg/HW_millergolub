@@ -50,3 +50,59 @@ map(problem_1_dt, sqrt)
 ``` {r 613_hw2_1.d}
 sapply(problem_1_dt, summary)
 ```
+
+## Problem 2: Write a function that uses a for loop that, for each iteration, randomly draws 5 observations from an exponential distribution with “rate” parameter 1 (use rexp()) and calculates its “mean”. It should do this 10,000 times. Choose an appropriate plot to plot the distribution of “means”.
+
+``` {r 613_hw2_2}
+Ten_Thousand_Means <- c()
+for (i in 1:10000){
+  FiveObservations <- rexp(5, rate = 1)
+  Ten_Thousand_Means <- append(Ten_Thousand_Means, mean(FiveObservations))
+}
+
+hist(Ten_Thousand_Means)
+```
+
+### 2_a: Repeat part 1 by using a map_*() function. 
+
+``` {r 613_hw2_2a}
+Ten_Thousand_Lists <- c()
+for (i in 1:10000){
+  FiveObservations <- list(rexp(5, rate = 1))
+  Ten_Thousand_Lists <- append(Ten_Thousand_Lists, FiveObservations)
+}
+
+MappedMeans <- map_dbl(Ten_Thousand_Lists, mean)
+
+hist(MappedMeans)
+```
+
+### 2_b: Repeat part 1 by using the replicate() function.
+
+``` {r 613_hw2_2b}
+replicate_ten_thousand <- replicate(10000, mean(rexp(5, 1)))
+
+hist(replicate_ten_thousand)
+```
+
+### 2_c: Use a another for loop that will print out plots for sample sizes of 5, 10, and 20 observations (instead of just 5).
+
+``` {r 613_hw2_2c}
+Ten_Thousand_Five <- c()
+Ten_Thousand_Ten <- c()
+Ten_Thousand_Twenty <- c()
+
+for (i in 1:10000){
+  FiveObservations <- mean(rexp(5, rate = 1))
+  TenObservations <- mean(rexp(10, rate = 1))
+  TwentyObservations <- mean(rexp(20, rate = 1))
+  
+  Ten_Thousand_Five <- append(Ten_Thousand_Five, mean(FiveObservations))
+  Ten_Thousand_Ten <- append(Ten_Thousand_Ten, mean(TenObservations))
+  Ten_Thousand_Twenty <- append(Ten_Thousand_Twenty, mean(TwentyObservations))
+}
+
+hist(Ten_Thousand_Five)
+hist(Ten_Thousand_Ten)
+hist(Ten_Thousand_Twenty)
+```
