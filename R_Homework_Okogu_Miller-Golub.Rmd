@@ -36,17 +36,17 @@ map_dbl(problem_1_dt, mean)
 ### 1_b: Use and show a map function to find the “standard deviation” of each column of the dt data table.
 
 ``` {r 613_hw2_1.b}
-
+map_dbl(problem_1_dt, sd)
 ```
 
 ### 1_c: Use and show a map function that will calculate the “square root” of each value of each column of the data table dt.
 
 ``` {r 613_hw2_1.c}
-
+map(problem_1_dt, sqrt)
 ```
 
 ### 1_d: Use R code to find the “mean”, “max”, “1st Quartile”, “3rd Quartile”, “Median”, and “Min” for each column of the dt data table. (Hint: You do not have to use a map function)
 
 ``` {r 613_hw2_1.d}
-
+sapply(problem_1_dt, summary)
 ```
