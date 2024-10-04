@@ -106,3 +106,40 @@ hist(Ten_Thousand_Five)
 hist(Ten_Thousand_Ten)
 hist(Ten_Thousand_Twenty)
 ```
+
+## Problem 3: Use and show R coding to calculate the “standard deviation” for each variable of the data table mtcars using the “Special For Loop Method”.
+
+Note: There are two methods. Please see a quick explanation for both methods in below:
+
+Method 1:
+``` {r 613_hw2_3_demo1}        
+multi_return <- function() {
+  my_list <- list("color" = "red", "size" = 20, "shape" = "round")
+  return(my_list)
+}
+a <- multi_return()
+a$color
+  
+a<- multi_return()
+a$shape
+
+a<- multi_return()
+a$size
+
+```
+
+Method 2. The “Special For Loop Method”
+
+``` {r 613_hw2_3_demo2} 
+# 1. output (use appropriate data frame instead of df)
+# 2. sequence
+# 3. body
+
+output <- vector("double", ncol(df))
+
+for (i in seq_along(df)) {
+  output[[i]] <- median(df[[i]])
+}
+
+output
+```
