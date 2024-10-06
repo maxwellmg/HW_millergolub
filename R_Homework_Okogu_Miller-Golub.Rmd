@@ -102,44 +102,32 @@ for (i in 1:10000){
   Ten_Thousand_Twenty <- append(Ten_Thousand_Twenty, mean(TwentyObservations))
 }
 
-hist(Ten_Thousand_Five)
-hist(Ten_Thousand_Ten)
-hist(Ten_Thousand_Twenty)
+par(mfrow = c(1, 3))  # Set up the plotting window for three plots side by side
+
+hist(Ten_Thousand_Five, main = "Sample Size = 5", xlab = "Means", col = "lightblue")
+hist(Ten_Thousand_Ten, main = "Sample Size = 10", xlab = "Means", col = "lightgreen")
+hist(Ten_Thousand_Twenty, main = "Sample Size = 20", xlab = "Means", col = "lightcoral")
+
 ```
 
 ## Problem 3: Use and show R coding to calculate the “standard deviation” for each variable of the data table mtcars using the “Special For Loop Method”.
 
-Note: There are two methods. Please see a quick explanation for both methods in below:
+```{r 613_hw_3}
+#Loading the mtcars dataset
+data(mtcars)
 
-Method 1:
-``` {r 613_hw2_3_demo1}        
-multi_return <- function() {
-  my_list <- list("color" = "red", "size" = 20, "shape" = "round")
-  return(my_list)
-}
-a <- multi_return()
-a$color
-  
-a<- multi_return()
-a$shape
+#Now creating an empty vector that will store the standard deviations.
+output <- vector("double", ncol(mtcars))
 
-a<- multi_return()
-a$size
 
-```
-
-Method 2. The “Special For Loop Method”
-
-``` {r 613_hw2_3_demo2} 
-# 1. output (use appropriate data frame instead of df)
-# 2. sequence
-# 3. body
-
-output <- vector("double", ncol(df))
-
-for (i in seq_along(df)) {
-  output[[i]] <- median(df[[i]])
+#This For Loop can calculate the standard deviation for each column.
+for (i in seq_along(mtcars)) {
+  output[i] <- sd(mtcars[[i]])
 }
 
+#To ensure that the 'mtcars' column names are included in the results.
+names(output) <- colnames(mtcars)
+
+# Display the standard deviations
 output
 ```
