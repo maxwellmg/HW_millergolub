@@ -1,0 +1,111 @@
+---
+title: "SQL_Class_Practice"
+author: "Maxwell Miller-Golub"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("duckdb")
+library(DBI)
+library(duckdb)
+con <- dbConnect(duckdb(dbdir = "flights.duckdb", read_only = TRUE))
+```
+
+### Practice 1: Select Flights from a Specific Carrier
+Write a SQL query to find all flights from the carrier "United Air Lines Inc.".
+
+```{sql, connection=con}
+SELECT *
+FROM flights
+WHERE carrier = 'UA';
+```
+
+### Practice 2: Count the Number of Flights for Each Carrier
+Write a SQL query to count the total number of flights for each carrier.
+
+```{sql, connection=con}
+SELECT "carrier", count(carrier)
+FROM flights
+GROUP BY "carrier";
+```
+
+### Practice 3: Find the Flights with the Longest Distance
+Write a SQL query to find the 10 longest flights based on the distance column.
+
+```{sql, connection=con}
+SELECT "ANY_VALUE"(carrier), "distance"
+FROM flights
+GROUP BY "distance"
+ORDER BY "distance" DESC
+LIMIT 10;
+```
+
+### Practice 4: Calculate Average Arrival Delay for Each Carrier
+Write a SQL query to calculate the average arrival delay (arr_delay) for each carrier, showing only those with a non-null delay.
+
+```{sql, connection=con}
+SELECT "carrier", AVG("arr_delay")
+FROM flights
+WHERE "arr_delay" IS NOT NULL
+GROUP BY "carrier";
+```
+
+### Practice 5: Find Flights Departing from JFK to LAX
+Write a SQL query to find all flights departing from JFK airport to LAX airport.
+
+```{sql, connection=con}
+SELECT *
+FROM flights
+WHERE "origin" = 'JFK' AND "dest" = 'LAX';
+```
+
+### Practice 6: Calculate the Total Number of Flights Each Month
+Write a SQL query to count the total number of flights for each month.
+
+```{sql, connection=con}
+SELECT "month", count(flight)
+FROM flights
+GROUP BY "month";
+```
+
+### Practice 7: Find Flights with Departure Delays Greater than 2 Hours
+Write a SQL query to find all flights that had a departure delay of more than 120 minutes.
+
+```{sql, connection=con}
+SELECT "flight", "dep_delay"
+FROM flights
+WHERE "dep_delay" > 120;
+```
+
+### Practice 8: Find the Number of Flights per Day
+Write a SQL query to count the number of flights for each day (use year, month, and day columns).
+
+```{sql, connection=con}
+SELECT CONCAT("month",'/',"day",'/',"year") AS DATE, COUNT("flight")
+FROM flights
+GROUP BY DATE;
+```
+
+### Practice 9: Find Flights That Arrived Early
+Write a SQL query to find all flights that arrived early (i.e., arr_delay is negative).
+
+```{sql, connection=con}
+SELECT "flight", "arr_delay"
+FROM flights
+WHERE "arr_delay" < 0;
+```
+
+### Practice 10: Find the Average Air Time per Carrier
+Write a SQL query to find the average air time for each carrier.
+
+```{sql, connection=con}
+SELECT "carrier", AVG("air_time")
+FROM flights
+GROUP BY "carrier";
+```
+
+```{r}
+DBI::dbDisconnect(con, shutdown = TRUE)
+```
