@@ -27,8 +27,17 @@ LGA:55.762605099931015
 EWR:55.54655251666285
 
 
-#![Mean temperature for each airport](dbeaver_problem1.png)
+![Mean temperature for each airport](dbeaver_problem1.png)
 
 ### 2. What is the average number of flights from each airport per day in January?
+
+LGA	256.4516129032258
+
+EWR	319.1290322580645
+
+JFK	295.51612903225805
+
+
+![Average flights per day from each airport in January](dbeaver_problem2.png)
 
 ### 3. What are the top destinations for each airport?
