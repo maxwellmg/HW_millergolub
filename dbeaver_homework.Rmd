@@ -1,0 +1,34 @@
+---
+title: "DBeaver IDE Homework"
+author: "Maxwell Miller-Golub and Kev Okoge"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#tinytex::install_tinytex()
+library(tinytex)
+```
+
+## Homework DBeaver IDE for SQL Queries
+
+Use DBeaver for all of these exercises.
+
+1. What is the mean temperature for flights from each airport?
+
+JFK:54.472150241212866
+
+LGA:55.762605099931015
+
+EWR:55.54655251666285
+
+
+#![Mean temperature for each airport](dbeaver_problem1.png)
+
+### 2. What is the average number of flights from each airport per day in January?
+
+### 3. What are the top destinations for each airport?
