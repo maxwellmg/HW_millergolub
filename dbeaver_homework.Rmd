@@ -41,3 +41,11 @@ JFK	295.51612903225805
 ![Average flights per day from each airport in January](dbeaver_problem2.png)
 
 ### 3. What are the top destinations for each airport?
+
+JFK	LAX	11262
+
+EWR	ORD	6100
+
+LGA	ATL	10263
+
+![Top Destinations for Each Airport](dbeaver_problem3.png)
